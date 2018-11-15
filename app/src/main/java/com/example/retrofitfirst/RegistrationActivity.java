@@ -6,8 +6,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
-import com.example.retrofitfirst.logic.ControllerDino;
+import com.example.retrofitfirst.logic.MainLogic;
 
+
+/**
+ * Created by Dmitry Titorenko on 15.11.2018.
+ */
 public class RegistrationActivity extends AppCompatActivity {
     private String name;
     private String mail;
@@ -31,8 +35,8 @@ public class RegistrationActivity extends AppCompatActivity {
         name = etName.getText().toString();
         mail = etMail.getText().toString();
         password = etPassword.getText().toString();
-        ControllerDino controllerDino = new ControllerDino();
-        controllerDino.start();
-        controllerDino.sendUser(name, mail, password);
+        MainLogic mainLogic = new MainLogic();
+        mainLogic.start();
+        mainLogic.userLogicStart(name, mail, password);
     }
 }

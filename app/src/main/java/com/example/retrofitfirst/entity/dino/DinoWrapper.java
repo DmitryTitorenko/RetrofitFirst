@@ -1,8 +1,7 @@
-package com.example.retrofitfirst.entity;
+package com.example.retrofitfirst.entity.dino;
 
 import java.util.List;
 
-import com.example.retrofitfirst.entity.Dino;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 

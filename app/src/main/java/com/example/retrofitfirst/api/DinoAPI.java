@@ -1,6 +1,6 @@
 package com.example.retrofitfirst.api;
 
-import com.example.retrofitfirst.entity.DinoWrapper;
+import com.example.retrofitfirst.entity.dino.DinoWrapper;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

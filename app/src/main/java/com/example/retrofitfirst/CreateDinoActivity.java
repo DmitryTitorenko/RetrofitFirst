@@ -9,7 +9,8 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.widget.Button;
 
-import com.example.retrofitfirst.logic.ControllerDino;
+
+import com.example.retrofitfirst.logic.MainLogic;
 
 import java.io.FileNotFoundException;
 
@@ -32,7 +33,7 @@ public class CreateDinoActivity extends AppCompatActivity {
         });
     }
 
-    //get image from media and send it to ControllerDino.class
+    //get image from media and send it to MainLogic.class
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
@@ -45,9 +46,9 @@ public class CreateDinoActivity extends AppCompatActivity {
                     bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(targetUri));
 
                     // start logic
-                    ControllerDino controllerDino = new ControllerDino();
-                    controllerDino.start();
-                    controllerDino.sendImage(bitmap);
+                    MainLogic mainLogic = new MainLogic();
+                    mainLogic.start();
+                    mainLogic.sendImage(bitmap);
 
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();

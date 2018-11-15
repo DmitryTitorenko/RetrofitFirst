@@ -15,12 +15,4 @@ public interface ImageAPI {
     @Headers({"Content-Type: application/json","Accepts: application/json"})
     @POST("file")
     Call<ImageResponse> saveImagePost(@Body ImageSend imageSend);
-
-
-/*
-    Call<ImageResponse> saveImagePost(@Field("filename") String filename,
-                                      @Field("target_uri") String targetUri,
-                                      @Field("filemime") String filemime,
-                                      @Field("file")  String file,
-                                      @Field("filesize") String filesize);*/
 }
