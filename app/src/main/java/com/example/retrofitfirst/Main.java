@@ -9,7 +9,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        ControllerDino controllerDino = new ControllerDino();
-        controllerDino.start();
+        //ControllerDino controllerDino = new ControllerDino();
+     //   controllerDino.start();
     }
 }

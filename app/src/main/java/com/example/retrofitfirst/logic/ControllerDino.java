@@ -1,5 +1,9 @@
 package com.example.retrofitfirst.logic;
 
+import android.graphics.Bitmap;
+import android.util.Base64;
+import android.util.Log;
+
 import com.example.retrofitfirst.api.DinoAPI;
 import com.example.retrofitfirst.api.ImageAPI;
 import com.example.retrofitfirst.entity.DinoWrapper;
@@ -7,6 +11,12 @@ import com.example.retrofitfirst.entity.image.ImagePost;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.io.ByteArrayOutputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -17,17 +27,29 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by Dmitry Titorenko on 14.11.2018.
  */
 public class ControllerDino implements Callback<DinoWrapper> {
+    private static final String TAG = "MyLog";
 
     private static final String BASE_URL = "http://dinotest.art-coral.com/rest/";
     private ImageAPI imageAPI;
 
-    public void start() {
+    private Bitmap bitmap;
+
+    public void start(Bitmap bitmap) {
+        this.bitmap = bitmap;
         Gson gson = new GsonBuilder()
                 .setLenient()
                 .create();
 
+        // for logging json
+        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+        OkHttpClient client = new OkHttpClient.Builder()
+                .addInterceptor(logging)
+                .build();
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
+                .client(client)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
 
@@ -44,6 +66,7 @@ public class ControllerDino implements Callback<DinoWrapper> {
         sendImage();
     }
 
+    // get dinos
     @Override
     public void onResponse(Call<DinoWrapper> call, Response<DinoWrapper> response) {
         if (response.isSuccessful()) {
@@ -62,11 +85,11 @@ public class ControllerDino implements Callback<DinoWrapper> {
 
 
     public void sendImage() {
-        String filename = "dinosaur_PNG16571";
-        String targetUri = "pictures/dinosaur_PNG16571";
-        String filemime = "image/png";
-        String file = "";
-        String filesize = "307239";
+        String filename = "dinosaur_PNG1657188.jpg";
+        String targetUri = "pictures/dinosaur_PNG1657188.jpg";
+        String filemime = "image/jpeg";
+        String file = ConvertBitmapToString(bitmap);
+        String filesize = "22803";
 
         imageAPI.saveImagePost(
                 filename,
@@ -79,9 +102,14 @@ public class ControllerDino implements Callback<DinoWrapper> {
                     public void onResponse(Call<ImagePost> call, Response<ImagePost> response) {
 
                         if (response.isSuccessful()) {
+                            Log.i(TAG, "works Image");
+                            Log.i(TAG, response.body().getFid());
+                            Log.i(TAG, response.body().getUri());
+
+                            /*
                             System.out.println("works Image");
                             System.out.println(response.body().getFid());
-                            System.out.println(response.body().getUri());
+                            System.out.println(response.body().getUri());*/
                         }
                     }
 
@@ -90,5 +118,20 @@ public class ControllerDino implements Callback<DinoWrapper> {
                         t.printStackTrace();
                     }
                 });
+    }
+
+    //method to convert the selected image to base64 encoded string
+    public static String ConvertBitmapToString(Bitmap bitmap) {
+        String encodedImage = "";
+
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 50, byteArrayOutputStream);
+        try {
+            encodedImage = URLEncoder.encode(Base64.encodeToString(byteArrayOutputStream.toByteArray(), Base64.DEFAULT), "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        return encodedImage;
     }
 }
