@@ -47,6 +47,7 @@ public class CreateDinoActivity extends AppCompatActivity {
                     // start logic
                     ControllerDino controllerDino = new ControllerDino();
                     controllerDino.start();
+                    controllerDino.sendImage(bitmap);
 
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();

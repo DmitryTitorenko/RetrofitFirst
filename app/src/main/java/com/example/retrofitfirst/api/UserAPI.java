@@ -1,6 +1,6 @@
 package com.example.retrofitfirst.api;
 
-import com.example.retrofitfirst.entity.user.UserPost;
+import com.example.retrofitfirst.entity.user.UserResponse;
 import com.example.retrofitfirst.entity.user.UserSend;
 
 import retrofit2.Call;
@@ -15,5 +15,5 @@ public interface UserAPI {
 
     @Headers({"Content-Type: application/json", "Accepts: application/json"})
     @POST("user")
-    Call<UserPost> saveUser(@Body UserSend userSend);
+    Call<UserResponse> saveUser(@Body UserSend userSend);
 }

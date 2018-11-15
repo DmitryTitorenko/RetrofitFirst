@@ -1,22 +1,17 @@
 package com.example.retrofitfirst.logic;
 
 import android.graphics.Bitmap;
-import android.util.Base64;
 import android.util.Log;
 
-import com.example.retrofitfirst.api.DinoAPI;
 import com.example.retrofitfirst.api.ImageAPI;
 import com.example.retrofitfirst.api.UserAPI;
 import com.example.retrofitfirst.entity.DinoWrapper;
-import com.example.retrofitfirst.entity.image.ImagePost;
-import com.example.retrofitfirst.entity.user.UserPost;
+import com.example.retrofitfirst.entity.image.ImageResponse;
+import com.example.retrofitfirst.entity.image.ImageSend;
+import com.example.retrofitfirst.entity.user.UserResponse;
 import com.example.retrofitfirst.entity.user.UserSend;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
-import java.io.ByteArrayOutputStream;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -99,24 +94,29 @@ public class ControllerDino implements Callback<DinoWrapper> {
         t.printStackTrace();
     }
 
+    public void sendImage(Bitmap bitmap) {
 
-    public void sendImage() {//add Bitmap bitmap
-        //add         this.bitmap = bitmap;
+        imageAPI = retrofit.create(ImageAPI.class);
+
+        ImageSend imageSend = new ImageSend();
+
+        imageSend.setFileName("dinosaur_PNG1657188.jpg");
+        imageSend.setTargetUri("pictures/dinosaur_PNG1657188.jpg");
+        imageSend.setFileMime("image/jpeg");
+        imageSend.setFile(ConvertBitmapToString.Convert(bitmap));
+        imageSend.setFileSize("22803");
+
+        /*
         String filename = "dinosaur_PNG1657188.jpg";
         String targetUri = "pictures/dinosaur_PNG1657188.jpg";
         String filemime = "image/jpeg";
-        String file = ConvertBitmapToString(bitmap);
-        String filesize = "22803";
+        String file = ConvertBitmapToString.Convert(bitmap);
+        String filesize = "22803";*/
 
-        imageAPI.saveImagePost(
-                filename,
-                targetUri,
-                filemime,
-                file,
-                filesize)
-                .enqueue(new Callback<ImagePost>() {
+        imageAPI.saveImagePost(imageSend)
+                .enqueue(new Callback<ImageResponse>() {
                     @Override
-                    public void onResponse(Call<ImagePost> call, Response<ImagePost> response) {
+                    public void onResponse(Call<ImageResponse> call, Response<ImageResponse> response) {
 
                         if (response.isSuccessful()) {
                             Log.i(TAG, "works Image");
@@ -131,7 +131,7 @@ public class ControllerDino implements Callback<DinoWrapper> {
                     }
 
                     @Override
-                    public void onFailure(Call<ImagePost> call, Throwable t) {
+                    public void onFailure(Call<ImageResponse> call, Throwable t) {
                         t.printStackTrace();
                     }
                 });
@@ -145,9 +145,9 @@ public class ControllerDino implements Callback<DinoWrapper> {
         userSend.setPass(pass);
 
         userAPI.saveUser(userSend)
-                .enqueue(new Callback<UserPost>() {
+                .enqueue(new Callback<UserResponse>() {
                     @Override
-                    public void onResponse(Call<UserPost> call, Response<UserPost> response) {
+                    public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
                         Log.i(TAG, "response");
                         if (response.isSuccessful()) {
                             Log.i(TAG, "works user");
@@ -157,25 +157,9 @@ public class ControllerDino implements Callback<DinoWrapper> {
                     }
 
                     @Override
-                    public void onFailure(Call<UserPost> call, Throwable t) {
+                    public void onFailure(Call<UserResponse> call, Throwable t) {
                         t.printStackTrace();
                     }
                 });
-    }
-
-
-    //method to convert the selected image to base64 encoded string
-    public static String ConvertBitmapToString(Bitmap bitmap) {
-        String encodedImage = "";
-
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 50, byteArrayOutputStream);
-        try {
-            encodedImage = URLEncoder.encode(Base64.encodeToString(byteArrayOutputStream.toByteArray(), Base64.DEFAULT), "UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-
-        return encodedImage;
     }
 }

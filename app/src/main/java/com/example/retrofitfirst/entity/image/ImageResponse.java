@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 /**
  * Created by Dmitry Titorenko on 14.11.2018.
  */
-public class ImagePost {
+public class ImageResponse {
 
     @SerializedName("fid")
     @Expose
