@@ -6,8 +6,11 @@ import android.util.Log;
 
 import com.example.retrofitfirst.api.DinoAPI;
 import com.example.retrofitfirst.api.ImageAPI;
+import com.example.retrofitfirst.api.UserAPI;
 import com.example.retrofitfirst.entity.DinoWrapper;
 import com.example.retrofitfirst.entity.image.ImagePost;
+import com.example.retrofitfirst.entity.user.UserPost;
+import com.example.retrofitfirst.entity.user.UserSend;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -31,10 +34,14 @@ public class ControllerDino implements Callback<DinoWrapper> {
 
     private static final String BASE_URL = "http://dinotest.art-coral.com/rest/";
     private ImageAPI imageAPI;
+    private UserAPI userAPI;
+
+    Retrofit retrofit;
 
     private Bitmap bitmap;
 
-    public void start(Bitmap bitmap) {
+
+    public void start() {
         this.bitmap = bitmap;
         Gson gson = new GsonBuilder()
                 .setLenient()
@@ -47,7 +54,7 @@ public class ControllerDino implements Callback<DinoWrapper> {
                 .addInterceptor(logging)
                 .build();
 
-        Retrofit retrofit = new Retrofit.Builder()
+        retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create(gson))
@@ -61,10 +68,19 @@ public class ControllerDino implements Callback<DinoWrapper> {
         call.enqueue(this);*/
 
 
+
+        /*
         //get image
         imageAPI = retrofit.create(ImageAPI.class);
-        sendImage();
+        sendImage();*/
+
+        /*
+        //get user
+        userAPI=retrofit.create(UserAPI.class);
+        sendUser();*/
+
     }
+
 
     // get dinos
     @Override
@@ -84,7 +100,8 @@ public class ControllerDino implements Callback<DinoWrapper> {
     }
 
 
-    public void sendImage() {
+    public void sendImage() {//add Bitmap bitmap
+        //add         this.bitmap = bitmap;
         String filename = "dinosaur_PNG1657188.jpg";
         String targetUri = "pictures/dinosaur_PNG1657188.jpg";
         String filemime = "image/jpeg";
@@ -119,6 +136,33 @@ public class ControllerDino implements Callback<DinoWrapper> {
                     }
                 });
     }
+
+    public void sendUser(String name, String mail, String pass) {
+        userAPI = retrofit.create(UserAPI.class);
+        UserSend userSend = new UserSend();
+        userSend.setName(name);
+        userSend.setMail(mail);
+        userSend.setPass(pass);
+
+        userAPI.saveUser(userSend)
+                .enqueue(new Callback<UserPost>() {
+                    @Override
+                    public void onResponse(Call<UserPost> call, Response<UserPost> response) {
+                        Log.i(TAG, "response");
+                        if (response.isSuccessful()) {
+                            Log.i(TAG, "works user");
+                            Log.i(TAG, response.body().getUid());
+                            Log.i(TAG, response.body().getUri());
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<UserPost> call, Throwable t) {
+                        t.printStackTrace();
+                    }
+                });
+    }
+
 
     //method to convert the selected image to base64 encoded string
     public static String ConvertBitmapToString(Bitmap bitmap) {
