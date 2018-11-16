@@ -2,41 +2,42 @@ package com.example.retrofitfirst;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
 import com.example.retrofitfirst.logic.MainLogic;
 
-
 /**
- * Created by Dmitry Titorenko on 15.11.2018.
+ * Created by Dmitry Titorenko on 16.11.2018.
  */
-public class RegistrationActivity extends AppCompatActivity {
+public class AuthorizationActivity extends AppCompatActivity {
     private String name;
-    private String mail;
     private String password;
 
-    EditText etName;
-    EditText etMail;
-    EditText etPassword;
+    private EditText etName;
+    private EditText etPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_registration);
+        setContentView(R.layout.activity_authorization);
 
         etName = findViewById(R.id.etName);
-        etMail = findViewById(R.id.etMail);
         etPassword = findViewById(R.id.etPassword);
     }
 
-    public void registrationUser(View view) {
+    public void loginUser(View view) {
         name = etName.getText().toString();
-        mail = etMail.getText().toString();
         password = etPassword.getText().toString();
         MainLogic mainLogic = new MainLogic();
         mainLogic.start();
-        mainLogic.regUserStart(name, mail, password);
+        mainLogic.userLogInStart(name, password);
+    }
+
+    public void toRegistrationUser(View view) {
+        Intent intent = new Intent(this, RegistrationActivity.class);
+        startActivity(intent);
     }
 }

@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
 /**
  * Created by Dmitry Titorenko on 15.11.2018.
  */
-public class UserResponse {
+public class UserRegResponse {
     @SerializedName("uid")
     @Expose
     private String uid;

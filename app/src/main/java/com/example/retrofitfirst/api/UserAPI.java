@@ -1,7 +1,9 @@
 package com.example.retrofitfirst.api;
 
-import com.example.retrofitfirst.entity.user.UserResponse;
-import com.example.retrofitfirst.entity.user.UserSend;
+import com.example.retrofitfirst.entity.user.UserLogInPOST;
+import com.example.retrofitfirst.entity.user.UserLogInResponse;
+import com.example.retrofitfirst.entity.user.UserRegResponse;
+import com.example.retrofitfirst.entity.user.UserRegPOST;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -15,5 +17,9 @@ public interface UserAPI {
 
     @Headers({"Content-Type: application/json", "Accepts: application/json"})
     @POST("user")
-    Call<UserResponse> saveUser(@Body UserSend userSend);
+    Call<UserRegResponse> regUser(@Body UserRegPOST userRegPOST);
+
+    @Headers({"Content-Type: application/json", "Accepts: application/json"})
+    @POST("user/login")
+    Call<UserLogInResponse> logInUser(@Body UserLogInPOST userLogInPOST);
 }

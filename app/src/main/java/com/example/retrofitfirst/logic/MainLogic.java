@@ -34,7 +34,7 @@ public class MainLogic implements Callback<DinoWrapper> {
                 .setLenient()
                 .create();
 
-        // for logging json
+        // logging json
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
         logging.setLevel(HttpLoggingInterceptor.Level.BODY);
         OkHttpClient client = new OkHttpClient.Builder()
@@ -79,9 +79,16 @@ public class MainLogic implements Callback<DinoWrapper> {
         ImageLogic.sendImage(imageAPI, bitmap);
     }
 
-    public void userLogicStart(String name, String mail, String pass) {
+    public void regUserStart(String name, String mail, String pass) {
 
         userAPI = retrofit.create(UserAPI.class);
-        UserLogic.sendUser(userAPI, name, mail, pass);
+        UserLogic.regUser(userAPI, name, mail, pass);
+    }
+
+    public void userLogInStart(String name, String password) {
+
+        userAPI = retrofit.create(UserAPI.class);
+        UserLogic.logInUser(userAPI, name, password);
+
     }
 }
