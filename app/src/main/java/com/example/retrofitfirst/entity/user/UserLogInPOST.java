@@ -6,6 +6,12 @@ import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by Dmitry Titorenko on 16.11.2018.
+ * <p>
+ * This POJO use for correct send login user in JSON to server:
+ * {
+ * "username":"[NAME]",
+ * "password":"[PASS]"
+ * }
  */
 public class UserLogInPOST {
     @SerializedName("username")

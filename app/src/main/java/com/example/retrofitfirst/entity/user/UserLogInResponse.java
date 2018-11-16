@@ -6,6 +6,14 @@ import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by Dmitry Titorenko on 16.11.2018.
+ * <p>
+ * This POJO use for correct get login user in JSON from server:
+ * {
+ * "sessid":"[session_id]",
+ * "session_name":"[session_name]",
+ * "token":"[token]",
+ * "user":{ ... }
+ * }
  */
 public class UserLogInResponse {
     @SerializedName("sessid")

@@ -5,6 +5,13 @@ import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by Dmitry Titorenko on 15.11.2018.
+ * <p>
+ * This POJO use for correct registration user in JSON to server:
+ * {
+ * "name": "[NAME]",
+ * "mail": "[MAIL]",
+ * "pass": "[PASS]"
+ * }
  */
 public class UserRegPOST {
     @SerializedName("name")

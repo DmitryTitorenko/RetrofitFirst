@@ -7,6 +7,8 @@ import retrofit2.http.GET;
 
 /**
  * Created by Dmitry Titorenko on 14.11.2018.
+ * <p>
+ * Create corresponding dino api for interaction with server.
  */
 public interface DinoAPI {
 

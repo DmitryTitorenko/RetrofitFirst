@@ -18,6 +18,14 @@ import retrofit2.Response;
 public class UserLogic {
     private static final String TAG = "MyLog";
 
+    /**
+     * Send JSON to reg user and get response from server.
+     *
+     * @param userAPI corresponding user api for interaction with server;
+     * @param name    user name;
+     * @param mail    user mail;
+     * @param pass    user password.
+     */
     public static void regUser(UserAPI userAPI, String name, String mail, String pass) {
 
         UserRegPOST userRegPOST = new UserRegPOST();
@@ -45,6 +53,13 @@ public class UserLogic {
                 });
     }
 
+    /**
+     * Send JSON to log in user and get response from server.
+     *
+     * @param userAPI  corresponding user api for interaction with server;
+     * @param username user name;
+     * @param password user password.
+     */
     public static void logInUser(UserAPI userAPI, String username, String password) {
 
         UserLogInPOST userLogInPOST = new UserLogInPOST();

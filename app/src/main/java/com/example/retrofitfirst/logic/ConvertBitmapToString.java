@@ -12,7 +12,11 @@ import java.net.URLEncoder;
  */
 public class ConvertBitmapToString {
 
-    //method to convert the selected image to base64 encoded string
+    /**
+     * Convert the selected image to base64 encoded string.
+     *
+     * @param bitmap image to convert.
+     */
     public static String Convert(Bitmap bitmap) {
         String encodedImage = "";
 

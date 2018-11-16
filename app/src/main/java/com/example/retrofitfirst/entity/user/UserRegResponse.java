@@ -5,6 +5,12 @@ import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by Dmitry Titorenko on 15.11.2018.
+ * <p>
+ * This POJO use for correct get login user in JSON from server:
+ * {
+ * "uid": "[UID]",
+ * "uri": "BASE_URL/rest/user/[UID]"
+ * }
  */
 public class UserRegResponse {
     @SerializedName("uid")

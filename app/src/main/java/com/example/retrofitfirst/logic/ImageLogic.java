@@ -18,6 +18,12 @@ public class ImageLogic {
 
     private static final String TAG = "MyLog";
 
+    /**
+     * Send JSON to upload image and get response from server.
+     *
+     * @param imageAPI corresponding image api for interaction with server;
+     * @param bitmap   image to upload.
+     */
     public static void sendImage(ImageAPI imageAPI, Bitmap bitmap) {
 
         ImageSend imageSend = new ImageSend();
