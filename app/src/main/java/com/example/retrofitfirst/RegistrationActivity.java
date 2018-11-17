@@ -35,8 +35,11 @@ public class RegistrationActivity extends AppCompatActivity {
         name = etName.getText().toString();
         mail = etMail.getText().toString();
         password = etPassword.getText().toString();
-        MainLogic mainLogic = new MainLogic();
+        /*MainLogic mainLogic = new MainLogic();
         mainLogic.start();
-        mainLogic.regUserStart(name, mail, password);
+        mainLogic.regUserStart(name, mail, password);*/
+
+        MainLogic.getInstance().start();
+        MainLogic.getInstance().regUserStart(name, mail, password);
     }
 }

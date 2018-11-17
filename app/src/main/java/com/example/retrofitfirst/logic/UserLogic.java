@@ -17,6 +17,7 @@ import retrofit2.Response;
  */
 public class UserLogic {
     private static final String TAG = "MyLog";
+    public static boolean isLogIn = false;
 
     /**
      * Send JSON to reg user and get response from server.
@@ -40,6 +41,7 @@ public class UserLogic {
                     public void onResponse(Call<UserRegResponse> call, Response<UserRegResponse> response) {
 
                         if (response.isSuccessful()) {
+                            isLogIn = true;
                             Log.i(TAG, "reg user correct");
                             Log.i(TAG, "getUid: " + response.body().getUid());
                             Log.i(TAG, "getUri: " + response.body().getUri());

@@ -46,9 +46,8 @@ public class CreateDinoActivity extends AppCompatActivity {
                     bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(targetUri));
 
                     // start logic
-                    MainLogic mainLogic = new MainLogic();
-                    mainLogic.start();
-                    mainLogic.sendImage(bitmap);
+                    MainLogic.getInstance().start();
+                    MainLogic.getInstance().sendImage(bitmap);
 
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();

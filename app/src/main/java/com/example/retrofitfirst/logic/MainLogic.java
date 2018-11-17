@@ -2,31 +2,42 @@ package com.example.retrofitfirst.logic;
 
 import android.graphics.Bitmap;
 
+import com.example.retrofitfirst.api.DinoAPI;
 import com.example.retrofitfirst.api.ImageAPI;
 import com.example.retrofitfirst.api.UserAPI;
-import com.example.retrofitfirst.entity.dino.DinoWrapper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by Dmitry Titorenko on 14.11.2018.
+ * <p>
+ * It's Singleton
  */
-public class MainLogic implements Callback<DinoWrapper> {
-    private static final String TAG = "MyLog";
+public class MainLogic {
+
+    private static MainLogic instance;
 
     private static final String BASE_URL = "http://dinotest.art-coral.com/rest/";
     private ImageAPI imageAPI;
     private UserAPI userAPI;
+    private DinoAPI dinoAPI;
 
     private Retrofit retrofit;
+
+    private MainLogic() {
+
+    }
+
+    public static MainLogic getInstance() {
+        if (instance == null) {
+            return instance = new MainLogic();
+        } else return instance;
+    }
 
 
     public void start() {
@@ -46,32 +57,13 @@ public class MainLogic implements Callback<DinoWrapper> {
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
-
-        /*
-        //get dinos
-        DinoAPI dinoAPI = retrofit.create(DinoAPI.class);
-
-        Call<DinoWrapper> call = dinoAPI.loadDinos();
-        call.enqueue(this);*/
     }
 
-
-    // get dinos
-    @Override
-    public void onResponse(Call<DinoWrapper> call, Response<DinoWrapper> response) {
-        if (response.isSuccessful()) {
-            DinoWrapper dinoWrapper = response.body();
-            System.out.println(dinoWrapper.getDinos());
-            dinoWrapper.getDinos().forEach(dino -> System.out.println("Dino title: " + dino.getDino().getDinoTitle()));
-        } else {
-            System.out.println(response.errorBody());
-        }
+    public void getDinos() {
+        dinoAPI = retrofit.create(DinoAPI.class);
+        DinoLogic.getDinos(dinoAPI);
     }
 
-    @Override
-    public void onFailure(Call<DinoWrapper> call, Throwable t) {
-        t.printStackTrace();
-    }
 
     public void sendImage(Bitmap bitmap) {
 
