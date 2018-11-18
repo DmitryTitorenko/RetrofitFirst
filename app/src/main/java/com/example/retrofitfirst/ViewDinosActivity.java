@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 
 import com.example.retrofitfirst.entity.dino.DinoWrapper;
@@ -40,5 +42,10 @@ public class ViewDinosActivity extends AppCompatActivity {
 
         // update dinoWrapper in viewDinoAdapter and notify about it in rvDinos use rvDinos.notifyDataSetChanged()
         MainLogic.getInstance().getDinos(viewDinoAdapter, rvDinos);
+    }
+
+    public void createDino(View view) {
+        Intent intent = new Intent(this, CreateDinoActivity.class);
+        startActivity(intent);
     }
 }

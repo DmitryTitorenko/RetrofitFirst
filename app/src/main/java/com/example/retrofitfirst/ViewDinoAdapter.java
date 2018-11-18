@@ -4,27 +4,31 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.retrofitfirst.entity.dino.Dino;
 import com.example.retrofitfirst.entity.dino.DinoWrapper;
+
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+
 /**
  * Created by Dmitry Titorenko on 17.11.2018.
+ * <p>
+ * load image use Glide
+ * https://bumptech.github.io/glide/
  */
 public class ViewDinoAdapter extends RecyclerView.Adapter<ViewDinoAdapter.DinoHolder> {
 
     private static DinoWrapper dinoWrapper;
 
-
     public void setDinoWrapper(DinoWrapper dinoWrapper) {
         this.dinoWrapper = dinoWrapper;
     }
-
-
 
     // Provide a direct reference to each of the views within a data item
     // Used to cache the views within the item layout for fast access
@@ -33,6 +37,8 @@ public class ViewDinoAdapter extends RecyclerView.Adapter<ViewDinoAdapter.DinoHo
         // Your holder should contain a member variable
         // for any view that will be set as you render a row
         public TextView dinosData;
+        ImageView imageView;
+
 
         // We also create a constructor that accepts the entire item row
         // and does the view lookups to find each subview
@@ -43,6 +49,7 @@ public class ViewDinoAdapter extends RecyclerView.Adapter<ViewDinoAdapter.DinoHo
             super(itemView);
 
             dinosData = itemView.findViewById(R.id.tvItemDino);
+            imageView = itemView.findViewById(R.id.imDino);
         }
     }
 
@@ -69,13 +76,23 @@ public class ViewDinoAdapter extends RecyclerView.Adapter<ViewDinoAdapter.DinoHo
     public void onBindViewHolder(@NonNull DinoHolder holder, int position) {
 
         // Get the data model based on position
-        // Dino dino = DinoLogic.getDinoWrapper().getDinos().get(position);
-
         Dino dino = dinoWrapper.getDinos().get(position);
 
         // Set item views based on your views and data model
         TextView textView = holder.dinosData;
-        textView.setText(dino.getDino().getDinoTitle());
+        textView.setText("Title: " + dino.getDino().getDinoTitle() +
+                "\n" + "Color: " + dino.getDino().getDinoColor() +
+                "\n" + "Birthdate: " + dino.getDino().getDinoBirthdate() +
+                "\n" + "About: " + dino.getDino().getDinoAbout());
+
+        ImageView imageView = holder.imageView;
+
+        // load and set image
+        String url = dino.getDino().getDinoImage().getSrc();
+        Glide.with(imageView)
+                .load(url)
+                .into(holder.imageView)
+                .waitForLayout();
     }
 
 
@@ -87,9 +104,7 @@ public class ViewDinoAdapter extends RecyclerView.Adapter<ViewDinoAdapter.DinoHo
         return dinoWrapper.getDinos().size();
     }
 
-
     ViewDinoAdapter(DinoWrapper dinoWrapper) {
         this.dinoWrapper = dinoWrapper;
-
     }
 }
