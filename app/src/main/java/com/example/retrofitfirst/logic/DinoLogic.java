@@ -2,10 +2,12 @@ package com.example.retrofitfirst.logic;
 
 import android.util.Log;
 
+import com.example.retrofitfirst.ViewDinoAdapter;
 import com.example.retrofitfirst.api.DinoAPI;
 import com.example.retrofitfirst.entity.dino.DinoWrapper;
 
 
+import androidx.recyclerview.widget.RecyclerView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -20,7 +22,7 @@ public class DinoLogic {
     private static DinoWrapper dinoWrapper;
 
 
-    public static void getDinos(DinoAPI dinoAPI) {
+    public static void getDinos(DinoAPI dinoAPI, ViewDinoAdapter viewDinoAdapter, RecyclerView rvDinos) {
 
         Call<DinoWrapper> call = dinoAPI.loadDinos();
 
@@ -30,6 +32,12 @@ public class DinoLogic {
                 if (response.isSuccessful()) {
 
                     dinoWrapper = response.body();
+
+                    // update dinoWrapper
+                    viewDinoAdapter.setDinoWrapper(dinoWrapper);
+
+                    // notify adapter about it
+                    rvDinos.getAdapter().notifyDataSetChanged();
 
                     Log.i(TAG, "get Dino correct");
                     Log.i(TAG, response.body().getDinos().get(0).getDino().getDinoTitle());
@@ -45,9 +53,5 @@ public class DinoLogic {
             }
         });
 
-    }
-
-    public static DinoWrapper getDinoWrapper() {
-        return dinoWrapper;
     }
 }

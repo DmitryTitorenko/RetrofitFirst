@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.retrofitfirst.entity.dino.Dino;
-import com.example.retrofitfirst.logic.DinoLogic;
+import com.example.retrofitfirst.entity.dino.DinoWrapper;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,6 +16,14 @@ import androidx.recyclerview.widget.RecyclerView;
  * Created by Dmitry Titorenko on 17.11.2018.
  */
 public class ViewDinoAdapter extends RecyclerView.Adapter<ViewDinoAdapter.DinoHolder> {
+
+    private static DinoWrapper dinoWrapper;
+
+
+    public void setDinoWrapper(DinoWrapper dinoWrapper) {
+        this.dinoWrapper = dinoWrapper;
+    }
+
 
 
     // Provide a direct reference to each of the views within a data item
@@ -61,7 +69,9 @@ public class ViewDinoAdapter extends RecyclerView.Adapter<ViewDinoAdapter.DinoHo
     public void onBindViewHolder(@NonNull DinoHolder holder, int position) {
 
         // Get the data model based on position
-        Dino dino = DinoLogic.getDinoWrapper().getDinos().get(position);
+        // Dino dino = DinoLogic.getDinoWrapper().getDinos().get(position);
+
+        Dino dino = dinoWrapper.getDinos().get(position);
 
         // Set item views based on your views and data model
         TextView textView = holder.dinosData;
@@ -72,6 +82,14 @@ public class ViewDinoAdapter extends RecyclerView.Adapter<ViewDinoAdapter.DinoHo
     // Returns the total count of items in the list
     @Override
     public int getItemCount() {
-        return DinoLogic.getDinoWrapper().getDinos().size();
+        if (dinoWrapper.getDinos() == null)
+            return 0;
+        return dinoWrapper.getDinos().size();
+    }
+
+
+    ViewDinoAdapter(DinoWrapper dinoWrapper) {
+        this.dinoWrapper = dinoWrapper;
+
     }
 }

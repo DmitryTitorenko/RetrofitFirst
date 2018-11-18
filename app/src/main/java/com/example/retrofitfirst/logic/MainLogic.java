@@ -2,12 +2,14 @@ package com.example.retrofitfirst.logic;
 
 import android.graphics.Bitmap;
 
+import com.example.retrofitfirst.ViewDinoAdapter;
 import com.example.retrofitfirst.api.DinoAPI;
 import com.example.retrofitfirst.api.ImageAPI;
 import com.example.retrofitfirst.api.UserAPI;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import androidx.recyclerview.widget.RecyclerView;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -59,9 +61,9 @@ public class MainLogic {
                 .build();
     }
 
-    public void getDinos() {
+    public void getDinos(ViewDinoAdapter viewDinoAdapter, RecyclerView rvDinos) {
         dinoAPI = retrofit.create(DinoAPI.class);
-        DinoLogic.getDinos(dinoAPI);
+        DinoLogic.getDinos(dinoAPI,  viewDinoAdapter,  rvDinos);
     }
 
 
