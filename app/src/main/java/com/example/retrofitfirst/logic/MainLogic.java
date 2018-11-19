@@ -2,6 +2,7 @@ package com.example.retrofitfirst.logic;
 
 import android.graphics.Bitmap;
 
+import com.example.retrofitfirst.AuthorizationActivity;
 import com.example.retrofitfirst.ViewDinoAdapter;
 import com.example.retrofitfirst.api.DinoAPI;
 import com.example.retrofitfirst.api.ImageAPI;
@@ -112,10 +113,10 @@ public class MainLogic {
         UserLogic.regUser(userAPI, name, mail, pass);
     }
 
-    public void userLogInStart(String name, String password) {
+    public void userLogInStart(String name, String password, AuthorizationActivity authorizationActivity) {
 
         userAPI = retrofit.create(UserAPI.class);
-        UserLogic.logInUser(userAPI, name, password);
+        UserLogic.logInUser(userAPI, name, password, authorizationActivity);
 
     }
 

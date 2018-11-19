@@ -2,6 +2,7 @@ package com.example.retrofitfirst.logic;
 
 import android.util.Log;
 
+import com.example.retrofitfirst.AuthorizationActivity;
 import com.example.retrofitfirst.api.UserAPI;
 import com.example.retrofitfirst.entity.user.UserLogInPOST;
 import com.example.retrofitfirst.entity.user.UserLogInResponse;
@@ -17,7 +18,8 @@ import retrofit2.Response;
  */
 public class UserLogic {
     private static final String TAG = "MyLog";
-    public static boolean isLogIn = false;
+    public static boolean isLogIn1 = false;
+    public static String isLogIn = "Not";
 
     /**
      * Send JSON to reg user and get response from server.
@@ -41,7 +43,6 @@ public class UserLogic {
                     public void onResponse(Call<UserRegResponse> call, Response<UserRegResponse> response) {
 
                         if (response.isSuccessful()) {
-                            isLogIn = true;
                             Log.i(TAG, "reg user correct");
                             Log.i(TAG, "getUid: " + response.body().getUid());
                             Log.i(TAG, "getUri: " + response.body().getUri());
@@ -62,7 +63,7 @@ public class UserLogic {
      * @param username user name;
      * @param password user password.
      */
-    public static void logInUser(UserAPI userAPI, String username, String password) {
+    public static void logInUser(UserAPI userAPI, String username, String password, AuthorizationActivity authorizationActivity) {
 
         UserLogInPOST userLogInPOST = new UserLogInPOST();
 
@@ -76,7 +77,25 @@ public class UserLogic {
                     @Override
                     public void onResponse(Call<UserLogInResponse> call, Response<UserLogInResponse> response) {
 
+                        if (response.code() == 200) {
+                            isLogIn = "Yep";
+
+                        } else {
+                            isLogIn = "NotError";
+
+                        }
+
+
                         if (response.isSuccessful()) {
+                            Log.i(TAG, "code" + response.code());
+
+
+                            authorizationActivity.startListDino();
+
+
+                            Log.i(TAG, "code" + response.message());
+                            Log.i(TAG, "code" + response.errorBody());
+
 
                             MainLogic.getInstance().setUserLogInResponse(response.body());
 

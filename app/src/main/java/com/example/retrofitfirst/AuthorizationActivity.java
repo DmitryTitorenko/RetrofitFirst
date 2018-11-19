@@ -2,10 +2,12 @@ package com.example.retrofitfirst;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.retrofitfirst.logic.MainLogic;
 import com.example.retrofitfirst.logic.UserLogic;
@@ -35,20 +37,27 @@ public class AuthorizationActivity extends AppCompatActivity {
 
         MainLogic.getInstance().start();
 
-        MainLogic.getInstance().userLogInStart(name, password);
+        MainLogic.getInstance().userLogInStart(name, password,  this);
 
-        if (UserLogic.isLogIn = true) {
-            Intent intent = new Intent(this, ViewDinosActivity.class);
-            startActivity(intent);
 
-        } else {
-            // create activity for not correct password
-        }
 
     }
 
     public void toRegistrationUser(View view) {
         Intent intent = new Intent(this, RegistrationActivity.class);
         startActivity(intent);
+    }
+
+    public void startListDino(){
+        if (UserLogic.isLogIn.equals("Yep")) {
+            Intent intent = new Intent(this, ViewDinosActivity.class);
+            startActivity(intent);
+
+        } else {
+            Context context = getApplicationContext();
+            CharSequence text = "Not correct login or password";
+            Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
+            toast.show();
+        }
     }
 }
