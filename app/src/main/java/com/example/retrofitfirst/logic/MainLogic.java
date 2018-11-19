@@ -6,6 +6,10 @@ import com.example.retrofitfirst.ViewDinoAdapter;
 import com.example.retrofitfirst.api.DinoAPI;
 import com.example.retrofitfirst.api.ImageAPI;
 import com.example.retrofitfirst.api.UserAPI;
+import com.example.retrofitfirst.entity.dino.create.FieldDinoAbout;
+import com.example.retrofitfirst.entity.dino.create.FieldDinoBirthDate;
+import com.example.retrofitfirst.entity.dino.create.FieldDinoColor;
+import com.example.retrofitfirst.entity.dino.create.FieldDitoImage;
 import com.example.retrofitfirst.entity.user.UserLogInResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -29,6 +33,8 @@ public class MainLogic {
     private ImageAPI imageAPI;
     private UserAPI userAPI;
     private DinoAPI dinoAPI;
+
+    private String imageFID;
 
 
     private UserLogInResponse userLogInResponse;
@@ -78,6 +84,28 @@ public class MainLogic {
         imageLogic.sendImage(imageAPI, bitmap, filemime, fileName);
     }
 
+    public void sendDino(String title,
+                         String status,
+                         String name,
+                         String type,
+                         FieldDinoColor fieldDinoColor,
+                         FieldDinoAbout fieldDinoAbout,
+                         FieldDinoBirthDate fieldDinoBirthDate,
+                         FieldDitoImage fieldDitoImage) {
+        dinoAPI = retrofit.create(DinoAPI.class);
+        DinoLogic dinoLogic = new DinoLogic();
+        dinoLogic.sendDino(dinoAPI,
+                title,
+                status,
+                name,
+                type,
+                fieldDinoColor,
+                fieldDinoAbout,
+                fieldDinoBirthDate,
+                fieldDitoImage);
+    }
+
+
     public void regUserStart(String name, String mail, String pass) {
 
         userAPI = retrofit.create(UserAPI.class);
@@ -98,5 +126,13 @@ public class MainLogic {
 
     public void setUserLogInResponse(UserLogInResponse userLogInResponse) {
         this.userLogInResponse = userLogInResponse;
+    }
+
+    public String getImageFID() {
+        return imageFID;
+    }
+
+    public void setImageFID(String imageFID) {
+        this.imageFID = imageFID;
     }
 }

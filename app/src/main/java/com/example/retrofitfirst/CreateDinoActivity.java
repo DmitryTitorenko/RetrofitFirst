@@ -2,34 +2,68 @@ package com.example.retrofitfirst;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
 import android.content.ContentResolver;
-import android.content.Context;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.provider.MediaStore;
+import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
+import android.widget.EditText;
 
 
+import com.example.retrofitfirst.entity.dino.create.FieldDinoAbout;
+import com.example.retrofitfirst.entity.dino.create.FieldDinoBirthDate;
+import com.example.retrofitfirst.entity.dino.create.FieldDinoColor;
+import com.example.retrofitfirst.entity.dino.create.FieldDitoImage;
+import com.example.retrofitfirst.entity.dino.create.Und;
+import com.example.retrofitfirst.entity.dino.create.Und_;
+import com.example.retrofitfirst.entity.dino.create.Und__;
+import com.example.retrofitfirst.entity.dino.create.Und___;
+import com.example.retrofitfirst.entity.dino.create.Value;
 import com.example.retrofitfirst.logic.MainLogic;
 
-import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Dmitry Titorenko on 15.11.2018.
  */
 public class CreateDinoActivity extends AppCompatActivity {
 
+    private String title;
+    private String status;
+    private String name;
+    private String type;
+    private FieldDinoColor fieldDinoColor;
+    private FieldDinoAbout fieldDinoAbout;
+    private FieldDinoBirthDate fieldDinoBirthDate;
+    private FieldDitoImage fieldDitoImage;
+
+    EditText etTitle;
+    EditText etName;
+    EditText etColor;
+    EditText etAbout;
+    EditText etDayBirthDate;
+    EditText etMonthBirthDate;
+    EditText etYerBirthDate;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_dino);
+
+        etTitle = findViewById(R.id.etTitle);
+        etName = findViewById(R.id.etName);
+        etColor = findViewById(R.id.etFieldColor);
+        etAbout = findViewById(R.id.etFieldDinoAbout);
+        etDayBirthDate = findViewById(R.id.etDay);
+        etMonthBirthDate = findViewById(R.id.etMonth);
+        etYerBirthDate = findViewById(R.id.etYear);
 
         Button btn_upload = findViewById(R.id.btn_upload);
         btn_upload.setOnClickListener(v -> {
@@ -39,6 +73,62 @@ public class CreateDinoActivity extends AppCompatActivity {
             startActivityForResult(intent, 0);
         });
     }
+
+    public void createDino(View view) {
+        title = etTitle.getText().toString();
+        status = "1";
+        name = etName.getText().toString();
+        type = "dino";
+
+        // set color
+        fieldDinoColor = new FieldDinoColor();
+        Und und = new Und();
+        und.setTid(etColor.getText().toString());
+        fieldDinoColor.setUnd(und);
+
+
+        //set About
+        fieldDinoAbout = new FieldDinoAbout();
+        Und_ und_ = new Und_();
+        und_.setValue(etAbout.getText().toString());
+        List<Und_> und_list = new ArrayList<>();
+        und_list.add(und_);
+        fieldDinoAbout.setUnd(und_list);
+
+
+        //set BirthDate
+        fieldDinoBirthDate = new FieldDinoBirthDate();
+
+        Value value = new Value();
+        value.setDay(etDayBirthDate.getText().toString());
+        value.setMonth(etMonthBirthDate.getText().toString());
+        value.setYear(etYerBirthDate.getText().toString());
+        value.setHour("00");
+        value.setMinute("00");
+        value.setSecond("00");
+
+        Und__ und__ = new Und__();
+        und__.setValue(value);
+
+        List<Und__> und__list = new ArrayList<>();
+        und__list.add(und__);
+
+        fieldDinoBirthDate.setUnd(und__list);
+
+        // set Image
+        fieldDitoImage = new FieldDitoImage();
+
+        Und___ und___ = new Und___();
+        und___.setFid(MainLogic.getInstance().getImageFID());
+
+        List<Und___> und___list = new ArrayList<>();
+        und___list.add(und___);
+
+        fieldDitoImage.setUnd(und___list);
+
+        MainLogic.getInstance().sendDino(title, status, name, type, fieldDinoColor, fieldDinoAbout, fieldDinoBirthDate, fieldDitoImage);
+    }
+
 
     //get image from media and send it to MainLogic.class
     @Override
@@ -71,6 +161,7 @@ public class CreateDinoActivity extends AppCompatActivity {
             }
         }
     }
+
 
     public String getMimeType(Uri uri) {
         String mimeType = null;

@@ -10,15 +10,111 @@
         android:id="@+id/btn_upload"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="21dp"
         android:text="@string/upload_picture"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintEnd_toStartOf="@+id/btCreateDino"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.965" />
+        app:layout_constraintTop_toBottomOf="@+id/etYear" />
+
+    <EditText
+        android:id="@+id/etTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:ems="10"
+        android:hint="Name Dino"
+        android:inputType="textPersonName"
+        android:text="Tyrannosaurus"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/etName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:hint="Author Username"
+        android:inputType="textPersonName"
+        android:text="UserName"
+        app:layout_constraintStart_toStartOf="@+id/etTitle"
+        app:layout_constraintTop_toBottomOf="@+id/etTitle"
+        tools:text="Jo" />
+
+    <EditText
+        android:id="@+id/etFieldDinoAbout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:hint="Dino About"
+        android:inputType="textPersonName"
+        android:text="Отряд: Ящеротазовые"
+        app:layout_constraintStart_toStartOf="@+id/etFieldColor"
+        app:layout_constraintTop_toBottomOf="@+id/etFieldColor" />
+
+    <EditText
+        android:id="@+id/etFieldColor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:hint="DINO_COLOR_TID"
+        android:inputType="number"
+        android:text="98"
+        app:layout_constraintStart_toStartOf="@+id/etName"
+        app:layout_constraintTop_toBottomOf="@+id/etName" />
+
+    <EditText
+        android:id="@+id/etDay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:hint="Day"
+        android:inputType="number"
+        android:text="5"
+        app:layout_constraintStart_toStartOf="@+id/etFieldDinoAbout"
+        app:layout_constraintTop_toBottomOf="@+id/etFieldDinoAbout" />
+
+    <EditText
+        android:id="@+id/etMonth"
+        android:layout_width="213dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:hint="Month"
+        android:inputType="number"
+        android:text="5"
+        app:layout_constraintStart_toStartOf="@+id/etDay"
+        app:layout_constraintTop_toBottomOf="@+id/etDay" />
+
+    <EditText
+        android:id="@+id/etYear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:hint="Year"
+        android:inputType="number"
+        android:text="2018"
+        app:layout_constraintStart_toStartOf="@+id/etMonth"
+        app:layout_constraintTop_toBottomOf="@+id/etMonth" />
+
+    <Button
+        android:id="@+id/btCreateDino"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="21dp"
+        android:layout_marginEnd="80dp"
+        android:onClick="createDino"
+        android:text="@string/create_dino"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btn_upload"
+        app:layout_constraintTop_toTopOf="@+id/btn_upload" />
 </androidx.constraintlayout.widget.ConstraintLayout>

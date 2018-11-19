@@ -60,6 +60,7 @@ public class ImageLogic {
                             Log.i(TAG, "works Image");
                             Log.i(TAG, response.body().getFid());
                             Log.i(TAG, response.body().getUri());
+                            MainLogic.getInstance().setImageFID(response.body().getFid());
                         }
                     }
 
