@@ -6,6 +6,7 @@ import com.example.retrofitfirst.ViewDinoAdapter;
 import com.example.retrofitfirst.api.DinoAPI;
 import com.example.retrofitfirst.api.ImageAPI;
 import com.example.retrofitfirst.api.UserAPI;
+import com.example.retrofitfirst.entity.user.UserLogInResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -28,6 +29,9 @@ public class MainLogic {
     private ImageAPI imageAPI;
     private UserAPI userAPI;
     private DinoAPI dinoAPI;
+
+
+    private UserLogInResponse userLogInResponse;
 
     private Retrofit retrofit;
 
@@ -63,14 +67,15 @@ public class MainLogic {
 
     public void getDinos(ViewDinoAdapter viewDinoAdapter, RecyclerView rvDinos) {
         dinoAPI = retrofit.create(DinoAPI.class);
-        DinoLogic.getDinos(dinoAPI,  viewDinoAdapter,  rvDinos);
+        DinoLogic.getDinos(dinoAPI, viewDinoAdapter, rvDinos);
     }
 
 
-    public void sendImage(Bitmap bitmap) {
+    public void sendImage(Bitmap bitmap, String filemime, String fileName) {
 
         imageAPI = retrofit.create(ImageAPI.class);
-        ImageLogic.sendImage(imageAPI, bitmap);
+        ImageLogic imageLogic = new ImageLogic();
+        imageLogic.sendImage(imageAPI, bitmap, filemime, fileName);
     }
 
     public void regUserStart(String name, String mail, String pass) {
@@ -84,5 +89,14 @@ public class MainLogic {
         userAPI = retrofit.create(UserAPI.class);
         UserLogic.logInUser(userAPI, name, password);
 
+    }
+
+
+    public UserLogInResponse getUserLogInResponse() {
+        return userLogInResponse;
+    }
+
+    public void setUserLogInResponse(UserLogInResponse userLogInResponse) {
+        this.userLogInResponse = userLogInResponse;
     }
 }

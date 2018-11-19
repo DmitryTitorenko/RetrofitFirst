@@ -28,7 +28,7 @@ public class ImageSend {
         return fileName;
     }
 
-    public void setFileName(String filNname) {
+    public void setFileName(String fileName) {
         this.fileName = fileName;
     }
 

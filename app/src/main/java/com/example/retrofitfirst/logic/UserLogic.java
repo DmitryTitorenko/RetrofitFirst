@@ -77,6 +77,9 @@ public class UserLogic {
                     public void onResponse(Call<UserLogInResponse> call, Response<UserLogInResponse> response) {
 
                         if (response.isSuccessful()) {
+
+                            MainLogic.getInstance().setUserLogInResponse(response.body());
+
                             Log.i(TAG, "logIn user correct");
                             Log.i(TAG, "user getSessid: " + response.body().getSessid());
                             Log.i(TAG, "user getSessionName: " + response.body().getSessionName());
