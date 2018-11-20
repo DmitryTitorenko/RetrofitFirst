@@ -13,13 +13,10 @@ import com.example.retrofitfirst.logic.MainLogic;
  * Created by Dmitry Titorenko on 15.11.2018.
  */
 public class RegistrationActivity extends AppCompatActivity {
-    private String name;
-    private String mail;
-    private String password;
 
-    EditText etName;
-    EditText etMail;
-    EditText etPassword;
+    private EditText etName;
+    private EditText etMail;
+    private EditText etPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,13 +28,13 @@ public class RegistrationActivity extends AppCompatActivity {
         etPassword = findViewById(R.id.etPassword);
     }
 
+    /*
+    Start get data from UI and start user registration
+     */
     public void registrationUser(View view) {
-        name = etName.getText().toString();
-        mail = etMail.getText().toString();
-        password = etPassword.getText().toString();
-        /*MainLogic mainLogic = new MainLogic();
-        mainLogic.start();
-        mainLogic.regUserStart(name, mail, password);*/
+        String name = etName.getText().toString();
+        String mail = etMail.getText().toString();
+        String password = etPassword.getText().toString();
 
         MainLogic.getInstance().start();
         MainLogic.getInstance().regUserStart(name, mail, password);

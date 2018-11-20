@@ -35,22 +35,13 @@ import java.util.List;
  */
 public class CreateDinoActivity extends AppCompatActivity {
 
-    private String title;
-    private String status;
-    private String name;
-    private String type;
-    private FieldDinoColor fieldDinoColor;
-    private FieldDinoAbout fieldDinoAbout;
-    private FieldDinoBirthDate fieldDinoBirthDate;
-    private FieldDitoImage fieldDitoImage;
-
-    EditText etTitle;
-    EditText etName;
-    EditText etColor;
-    EditText etAbout;
-    EditText etDayBirthDate;
-    EditText etMonthBirthDate;
-    EditText etYerBirthDate;
+    private EditText etTitle;
+    private EditText etName;
+    private EditText etColor;
+    private EditText etAbout;
+    private EditText etDayBirthDate;
+    private EditText etMonthBirthDate;
+    private EditText etYerBirthDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,20 +66,20 @@ public class CreateDinoActivity extends AppCompatActivity {
     }
 
     public void createDino(View view) {
-        title = etTitle.getText().toString();
-        status = "1";
-        name = etName.getText().toString();
-        type = "dino";
+        String title = etTitle.getText().toString();
+        String status = "1";
+        String name = etName.getText().toString();
+        String type = "dino";
 
         // set color
-        fieldDinoColor = new FieldDinoColor();
+        FieldDinoColor fieldDinoColor = new FieldDinoColor();
         UndDinoColor undDinoColor = new UndDinoColor();
         undDinoColor.setTid(etColor.getText().toString());
         fieldDinoColor.setUndDinoColor(undDinoColor);
 
 
         //set About
-        fieldDinoAbout = new FieldDinoAbout();
+        FieldDinoAbout fieldDinoAbout = new FieldDinoAbout();
         UndValueAbout undValueAbout = new UndValueAbout();
         undValueAbout.setValue(etAbout.getText().toString());
 
@@ -98,7 +89,7 @@ public class CreateDinoActivity extends AppCompatActivity {
 
 
         //set BirthDate
-        fieldDinoBirthDate = new FieldDinoBirthDate();
+        FieldDinoBirthDate fieldDinoBirthDate = new FieldDinoBirthDate();
 
         Value value = new Value();
         value.setDay(etDayBirthDate.getText().toString());
@@ -117,7 +108,7 @@ public class CreateDinoActivity extends AppCompatActivity {
         fieldDinoBirthDate.setUnd(undBirthDateValueList);
 
         // set Image
-        fieldDitoImage = new FieldDitoImage();
+        FieldDitoImage fieldDitoImage = new FieldDitoImage();
 
         UndImage undImage = new UndImage();
         undImage.setFid(MainLogic.getInstance().getImageFID());
@@ -164,7 +155,7 @@ public class CreateDinoActivity extends AppCompatActivity {
     }
 
 
-    public String getMimeType(Uri uri) {
+    private String getMimeType(Uri uri) {
         String mimeType = null;
         if (uri.getScheme().equals(ContentResolver.SCHEME_CONTENT)) {
             ContentResolver cr = this.getApplicationContext().getContentResolver();
@@ -178,13 +169,12 @@ public class CreateDinoActivity extends AppCompatActivity {
         return mimeType;
     }
 
-    public String getFileName(Uri uri) {
+    private String getFileName(Uri uri) {
         String result;
 
         //if uri is content
         if (uri.getScheme() != null && uri.getScheme().equals("content")) {
-            Cursor cursor = this.getApplicationContext().getContentResolver().query(uri, null, null, null, null);
-            try {
+            try (Cursor cursor = this.getApplicationContext().getContentResolver().query(uri, null, null, null, null)) {
                 if (cursor != null && cursor.moveToFirst()) {
                     //local filesystem
                     int index = cursor.getColumnIndex("_data");
@@ -197,8 +187,6 @@ public class CreateDinoActivity extends AppCompatActivity {
                     else
                         return null;
                 }
-            } finally {
-                cursor.close();
             }
         }
 

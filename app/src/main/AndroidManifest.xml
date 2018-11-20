@@ -15,7 +15,6 @@
         <activity android:name=".ViewDinosActivity"></activity>
         <activity android:name=".CreateDinoActivity" />
         <activity android:name=".RegistrationActivity" />
-        <activity android:name=".MainActivity" />
         <activity android:name=".AuthorizationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

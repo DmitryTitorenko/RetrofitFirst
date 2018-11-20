@@ -29,9 +29,13 @@ public class DinoLogic {
 
     private static final String TAG = "MyLog";
 
-    private static DinoWrapper dinoWrapper;
-    private UserLogInResponse userLogInResponse;
-
+    /**
+     * Send JSON to get dinos and response from server.
+     *
+     * @param dinoAPI         corresponding dino api for interaction with server;
+     * @param viewDinoAdapter set current DinoWrapper to view;
+     * @param rvDinos         use for notifyDataSetChanged() in viewDinoAdapter.
+     */
 
     public static void getDinos(DinoAPI dinoAPI, ViewDinoAdapter viewDinoAdapter, RecyclerView rvDinos) {
 
@@ -42,7 +46,7 @@ public class DinoLogic {
             public void onResponse(Call<DinoWrapper> call, Response<DinoWrapper> response) {
                 if (response.isSuccessful()) {
 
-                    dinoWrapper = response.body();
+                    DinoWrapper dinoWrapper = response.body();
 
                     // update dinoWrapper
                     viewDinoAdapter.setDinoWrapper(dinoWrapper);
@@ -67,6 +71,19 @@ public class DinoLogic {
     }
 
 
+    /**
+     * Send JSON to create dino and get response from server.
+     *
+     * @param dinoAPI            corresponding dino api for interaction with server;
+     * @param title              dino title ;
+     * @param status             status(default = 1)
+     * @param name               author username
+     * @param type               dino type (default = dino)
+     * @param fieldDinoColor     color 98(Green) or 99(Red) or 100(Purple)
+     * @param fieldDinoAbout     dino about
+     * @param fieldDinoBirthDate dino birthdate
+     * @param fieldDitoImage     Image file ID of dino
+     */
     public void sendDino(DinoAPI dinoAPI,
                          String title,
                          String status,
@@ -77,7 +94,7 @@ public class DinoLogic {
                          FieldDinoBirthDate fieldDinoBirthDate,
                          FieldDitoImage fieldDitoImage) {
 
-        userLogInResponse = MainLogic.getInstance().getUserLogInResponse();
+        UserLogInResponse userLogInResponse = MainLogic.getInstance().getUserLogInResponse();
 
         //create Headers
         Map<String, String> map = new HashMap<>();

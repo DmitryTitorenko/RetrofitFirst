@@ -1,5 +1,6 @@
 package com.example.retrofitfirst;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,13 +37,13 @@ public class ViewDinoAdapter extends RecyclerView.Adapter<ViewDinoAdapter.DinoHo
 
         // Your holder should contain a member variable
         // for any view that will be set as you render a row
-        public TextView dinosData;
+        TextView dinosData;
         ImageView imageView;
 
 
         // We also create a constructor that accepts the entire item row
         // and does the view lookups to find each subview
-        public DinoHolder(View itemView) {
+        DinoHolder(View itemView) {
 
             // Stores the itemView in a public final member variable that can be used
             // to access the context from any ViewHolder instance.
@@ -66,12 +67,12 @@ public class ViewDinoAdapter extends RecyclerView.Adapter<ViewDinoAdapter.DinoHo
         View dinoView = inflater.inflate(R.layout.item_dino, parent, false);
 
         // Return a new holder instance
-        DinoHolder dinoHolder = new DinoHolder(dinoView);
-        return dinoHolder;
+        return new DinoHolder(dinoView);
     }
 
 
     // set the view attributes based on the data
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull DinoHolder holder, int position) {
 

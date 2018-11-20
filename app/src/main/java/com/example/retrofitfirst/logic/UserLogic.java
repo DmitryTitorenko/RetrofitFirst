@@ -59,9 +59,10 @@ public class UserLogic {
     /**
      * Send JSON to log in user and get response from server.
      *
-     * @param userAPI  corresponding user api for interaction with server;
-     * @param username user name;
-     * @param password user password.
+     * @param userAPI               corresponding user api for interaction with server;
+     * @param username              user name;
+     * @param password              user password.
+     * @param authorizationActivity start list of dinos if authorization correct
      */
     public static void logInUser(UserAPI userAPI, String username, String password, AuthorizationActivity authorizationActivity) {
 

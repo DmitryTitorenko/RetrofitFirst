@@ -16,8 +16,6 @@ import com.example.retrofitfirst.logic.UserLogic;
  * Created by Dmitry Titorenko on 16.11.2018.
  */
 public class AuthorizationActivity extends AppCompatActivity {
-    private String name;
-    private String password;
 
     private EditText etName;
     private EditText etPassword;
@@ -32,8 +30,8 @@ public class AuthorizationActivity extends AppCompatActivity {
     }
 
     public void loginUser(View view) {
-        name = etName.getText().toString();
-        password = etPassword.getText().toString();
+        String name = etName.getText().toString();
+        String password = etPassword.getText().toString();
 
         MainLogic.getInstance().start();
 
