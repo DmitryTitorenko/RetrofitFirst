@@ -1,12 +1,26 @@
-package com.example.retrofitfirst.entity.dino;
+package com.example.retrofitfirst.entity.dino.get;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by Dmitry Titorenko on 14.11.2018.
+ * <p>
+ * {
+ * "dino_title": "[DINO_NAME]",
+ * "dino_color": "[DINO_COLOR]",
+ * "dino_birthdate": "[DINO_BIRTHDATE]",
+ * "dino_image": {
+ * "src": "[IMG_URL]",
+ * "alt": ""
+ * },
+ * "dino_about": "[DINO_ABOUT]"
+ * }
+ * }
+ *
+ * @see Dino
  */
-public class Dino_ {
+public class DinoFields {
 
     @SerializedName("dino_title")
     @Expose
@@ -28,40 +42,20 @@ public class Dino_ {
         return dinoTitle;
     }
 
-    public void setDinoTitle(String dinoTitle) {
-        this.dinoTitle = dinoTitle;
-    }
-
     public String getDinoColor() {
         return dinoColor;
-    }
-
-    public void setDinoColor(String dinoColor) {
-        this.dinoColor = dinoColor;
     }
 
     public String getDinoBirthdate() {
         return dinoBirthdate;
     }
 
-    public void setDinoBirthdate(String dinoBirthdate) {
-        this.dinoBirthdate = dinoBirthdate;
-    }
-
     public DinoImage getDinoImage() {
         return dinoImage;
     }
 
-    public void setDinoImage(DinoImage dinoImage) {
-        this.dinoImage = dinoImage;
-    }
-
     public String getDinoAbout() {
         return dinoAbout;
-    }
-
-    public void setDinoAbout(String dinoAbout) {
-        this.dinoAbout = dinoAbout;
     }
 
 }

@@ -5,18 +5,20 @@ import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by Dmitry Titorenko on 19.11.2018.
+ * <p>
+ * {
+ * "und": {"tid": "[DINO_COLOR_TID]"}
+ * }
+ *
+ * @see DinoCreate
  */
 public class FieldDinoColor {
 
     @SerializedName("und")
     @Expose
-    private Und und;
+    private UndDinoColor und;
 
-    public Und getUnd() {
-        return und;
-    }
-
-    public void setUnd(Und und) {
-        this.und = und;
+    public void setUndDinoColor(UndDinoColor undDinoColor) {
+        this.und = undDinoColor;
     }
 }

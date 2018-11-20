@@ -19,10 +19,10 @@ import com.example.retrofitfirst.entity.dino.create.FieldDinoAbout;
 import com.example.retrofitfirst.entity.dino.create.FieldDinoBirthDate;
 import com.example.retrofitfirst.entity.dino.create.FieldDinoColor;
 import com.example.retrofitfirst.entity.dino.create.FieldDitoImage;
-import com.example.retrofitfirst.entity.dino.create.Und;
-import com.example.retrofitfirst.entity.dino.create.Und_;
-import com.example.retrofitfirst.entity.dino.create.Und__;
-import com.example.retrofitfirst.entity.dino.create.Und___;
+import com.example.retrofitfirst.entity.dino.create.UndDinoColor;
+import com.example.retrofitfirst.entity.dino.create.UndValueAbout;
+import com.example.retrofitfirst.entity.dino.create.UndBirthDateValue;
+import com.example.retrofitfirst.entity.dino.create.UndImage;
 import com.example.retrofitfirst.entity.dino.create.Value;
 import com.example.retrofitfirst.logic.MainLogic;
 
@@ -82,18 +82,19 @@ public class CreateDinoActivity extends AppCompatActivity {
 
         // set color
         fieldDinoColor = new FieldDinoColor();
-        Und und = new Und();
-        und.setTid(etColor.getText().toString());
-        fieldDinoColor.setUnd(und);
+        UndDinoColor undDinoColor = new UndDinoColor();
+        undDinoColor.setTid(etColor.getText().toString());
+        fieldDinoColor.setUndDinoColor(undDinoColor);
 
 
         //set About
         fieldDinoAbout = new FieldDinoAbout();
-        Und_ und_ = new Und_();
-        und_.setValue(etAbout.getText().toString());
-        List<Und_> und_list = new ArrayList<>();
-        und_list.add(und_);
-        fieldDinoAbout.setUnd(und_list);
+        UndValueAbout undValueAbout = new UndValueAbout();
+        undValueAbout.setValue(etAbout.getText().toString());
+
+        List<UndValueAbout> undValueAboutList = new ArrayList<>();
+        undValueAboutList.add(undValueAbout);
+        fieldDinoAbout.setUnd(undValueAboutList);
 
 
         //set BirthDate
@@ -107,24 +108,24 @@ public class CreateDinoActivity extends AppCompatActivity {
         value.setMinute("00");
         value.setSecond("00");
 
-        Und__ und__ = new Und__();
-        und__.setValue(value);
+        UndBirthDateValue undBirthDateValue = new UndBirthDateValue();
+        undBirthDateValue.setValue(value);
 
-        List<Und__> und__list = new ArrayList<>();
-        und__list.add(und__);
+        List<UndBirthDateValue> undBirthDateValueList = new ArrayList<>();
+        undBirthDateValueList.add(undBirthDateValue);
 
-        fieldDinoBirthDate.setUnd(und__list);
+        fieldDinoBirthDate.setUnd(undBirthDateValueList);
 
         // set Image
         fieldDitoImage = new FieldDitoImage();
 
-        Und___ und___ = new Und___();
-        und___.setFid(MainLogic.getInstance().getImageFID());
+        UndImage undImage = new UndImage();
+        undImage.setFid(MainLogic.getInstance().getImageFID());
 
-        List<Und___> und___list = new ArrayList<>();
-        und___list.add(und___);
+        List<UndImage> undImageList = new ArrayList<>();
+        undImageList.add(undImage);
 
-        fieldDitoImage.setUnd(und___list);
+        fieldDitoImage.setUnd(undImageList);
 
         MainLogic.getInstance().sendDino(title, status, name, type, fieldDinoColor, fieldDinoAbout, fieldDinoBirthDate, fieldDitoImage);
     }

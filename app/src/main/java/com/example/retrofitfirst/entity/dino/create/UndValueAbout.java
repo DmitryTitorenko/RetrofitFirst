@@ -1,22 +1,26 @@
 package com.example.retrofitfirst.entity.dino.create;
 
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by Dmitry Titorenko on 19.11.2018.
+ * <p>
+ * <p>
+ * {
+ * "und": [{"value": "[DINO_ABOUT]"}]
+ * }
+ *
+ * @see FieldDinoAbout
  */
-public class Und__ {
+public class UndValueAbout {
 
     @SerializedName("value")
     @Expose
-    private Value value;
+    private String value;
 
-    public Value getValue() {
-        return value;
-    }
-
-    public void setValue(Value value) {
+    public void setValue(String value) {
         this.value = value;
     }
 

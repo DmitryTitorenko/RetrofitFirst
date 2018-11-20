@@ -5,6 +5,35 @@ import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by Dmitry Titorenko on 19.11.2018.
+ * <p>
+ * This POJO use for correct send create dino in JSON to server:
+ * {
+ * "title": "[DINO_NAME]",
+ * "status": "1",
+ * "name": "[NAME]",
+ * "type": "dino",
+ * "field_dino_color": {
+ * "und": {"tid": "[DINO_COLOR_TID]"}
+ * },
+ * "field_dino_about": {
+ * "und": [{"value": "[DINO_ABOUT]"}]
+ * },
+ * "field_dino_birth_date": {
+ * "und": [{
+ * "value": {
+ * "day": "[DAY]",
+ * "month": "[MONTH]",
+ * "year": "[YEAR]",
+ * "hour": "00",
+ * "minute": "00",
+ * "second": "00"
+ * }
+ * }]
+ * },
+ * "field_dito_image": {
+ * "und": [{"fid": "[FID]"}]
+ * }
+ * }
  */
 public class DinoCreate {
 
@@ -33,64 +62,32 @@ public class DinoCreate {
     @Expose
     private FieldDitoImage fieldDitoImage;
 
-    public String getTitle() {
-        return title;
-    }
-
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String getStatus() {
-        return status;
     }
 
     public void setStatus(String status) {
         this.status = status;
     }
 
-    public String getName() {
-        return name;
-    }
-
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getType() {
-        return type;
     }
 
     public void setType(String type) {
         this.type = type;
     }
 
-    public FieldDinoColor getFieldDinoColor() {
-        return fieldDinoColor;
-    }
-
     public void setFieldDinoColor(FieldDinoColor fieldDinoColor) {
         this.fieldDinoColor = fieldDinoColor;
-    }
-
-    public FieldDinoAbout getFieldDinoAbout() {
-        return fieldDinoAbout;
     }
 
     public void setFieldDinoAbout(FieldDinoAbout fieldDinoAbout) {
         this.fieldDinoAbout = fieldDinoAbout;
     }
 
-    public FieldDinoBirthDate getFieldDinoBirthDate() {
-        return fieldDinoBirthDate;
-    }
-
     public void setFieldDinoBirthDate(FieldDinoBirthDate fieldDinoBirthDate) {
         this.fieldDinoBirthDate = fieldDinoBirthDate;
-    }
-
-    public FieldDitoImage getFieldDitoImage() {
-        return fieldDitoImage;
     }
 
     public void setFieldDitoImage(FieldDitoImage fieldDitoImage) {

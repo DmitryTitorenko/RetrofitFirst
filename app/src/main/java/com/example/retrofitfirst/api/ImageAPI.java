@@ -2,7 +2,6 @@ package com.example.retrofitfirst.api;
 
 import com.example.retrofitfirst.entity.image.ImageResponse;
 import com.example.retrofitfirst.entity.image.ImageSend;
-import com.example.retrofitfirst.entity.user.UserLogInResponse;
 
 import java.util.Map;
 

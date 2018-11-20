@@ -8,8 +8,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.retrofitfirst.entity.dino.Dino;
-import com.example.retrofitfirst.entity.dino.DinoWrapper;
+import com.example.retrofitfirst.entity.dino.get.Dino;
+import com.example.retrofitfirst.entity.dino.get.DinoWrapper;
 
 
 import androidx.annotation.NonNull;

@@ -1,10 +1,17 @@
-package com.example.retrofitfirst.entity.dino;
+package com.example.retrofitfirst.entity.dino.get;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by Dmitry Titorenko on 14.11.2018.
+ * <p>
+ * {
+ * "src": "[IMG_URL]",
+ * "alt": ""
+ * }
+ *
+ * @see Dino
  */
 public class DinoImage {
 
@@ -17,18 +24,6 @@ public class DinoImage {
 
     public String getSrc() {
         return src;
-    }
-
-    public void setSrc(String src) {
-        this.src = src;
-    }
-
-    public String getAlt() {
-        return alt;
-    }
-
-    public void setAlt(String alt) {
-        this.alt = alt;
     }
 
 }

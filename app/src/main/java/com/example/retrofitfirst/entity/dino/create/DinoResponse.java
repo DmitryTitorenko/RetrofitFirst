@@ -5,6 +5,12 @@ import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by Dmitry Titorenko on 19.11.2018.
+ * <p>
+ * This POJO use for correct get response about create dino in JSON from server:
+ * {
+ * "nid": "[NID]",
+ * "uri": "BASE_URL/rest/node/[NID]"
+ * }
  */
 public class DinoResponse {
 
@@ -19,16 +25,10 @@ public class DinoResponse {
         return nid;
     }
 
-    public void setNid(String nid) {
-        this.nid = nid;
-    }
 
     public String getUri() {
         return uri;
     }
 
-    public void setUri(String uri) {
-        this.uri = uri;
-    }
 
 }

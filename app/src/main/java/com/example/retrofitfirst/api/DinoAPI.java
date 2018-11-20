@@ -1,6 +1,6 @@
 package com.example.retrofitfirst.api;
 
-import com.example.retrofitfirst.entity.dino.DinoWrapper;
+import com.example.retrofitfirst.entity.dino.get.DinoWrapper;
 import com.example.retrofitfirst.entity.dino.create.DinoCreate;
 import com.example.retrofitfirst.entity.dino.create.DinoResponse;
 
@@ -24,7 +24,7 @@ public interface DinoAPI {
     Call<DinoWrapper> loadDinos();
 
     /**
-     * Send image in BASE6 format and get FID (File ID) this image.
+     * Create dino use DinoCreate.class.
      *
      * @param dinoCreate entity dino to send.
      * @param headers   store dynamic request headers (X-CSRF-Token and Cookie)

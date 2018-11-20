@@ -1,27 +1,22 @@
 package com.example.retrofitfirst.logic;
 
-import android.graphics.Bitmap;
 import android.util.Log;
 
 import com.example.retrofitfirst.ViewDinoAdapter;
 import com.example.retrofitfirst.api.DinoAPI;
-import com.example.retrofitfirst.api.ImageAPI;
-import com.example.retrofitfirst.entity.dino.DinoWrapper;
+import com.example.retrofitfirst.entity.dino.get.DinoWrapper;
 import com.example.retrofitfirst.entity.dino.create.DinoCreate;
 import com.example.retrofitfirst.entity.dino.create.DinoResponse;
 import com.example.retrofitfirst.entity.dino.create.FieldDinoAbout;
 import com.example.retrofitfirst.entity.dino.create.FieldDinoBirthDate;
 import com.example.retrofitfirst.entity.dino.create.FieldDinoColor;
 import com.example.retrofitfirst.entity.dino.create.FieldDitoImage;
-import com.example.retrofitfirst.entity.image.ImageResponse;
-import com.example.retrofitfirst.entity.image.ImageSend;
 import com.example.retrofitfirst.entity.user.UserLogInResponse;
 
 
 import java.util.HashMap;
 import java.util.Map;
 
-import androidx.core.graphics.BitmapCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -109,7 +104,8 @@ public class DinoLogic {
 
                         if (response.isSuccessful()) {
                             Log.i(TAG, "works create Dino");
-                            //Log.i(TAG, response.body().getUri());
+                            Log.i(TAG, response.body().getUri());
+                            Log.i(TAG, response.body().getNid());
                         }
                     }
 
