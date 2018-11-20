@@ -1,5 +1,5 @@
 # RetrofitFirst
-Create HTTP client for Android
+Create client for Android
 
 ## Built With
 
