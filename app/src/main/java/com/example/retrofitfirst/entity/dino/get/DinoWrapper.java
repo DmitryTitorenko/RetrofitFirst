@@ -25,6 +25,12 @@ import com.google.gson.annotations.SerializedName;
  * }
  * ]
  * }
+ * <p>
+ * Comment:
+ * [DINO_COLOR] - (string) Dino Color
+ * [DINO_BIRTHDATE] - 06.04.1988
+ * <p>
+ * [IMG_URL] - Dino img url (http://....jpeg)
  */
 public class DinoWrapper {
 

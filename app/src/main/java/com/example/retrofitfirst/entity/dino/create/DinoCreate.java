@@ -34,6 +34,17 @@ import com.google.gson.annotations.SerializedName;
  * "und": [{"fid": "[FID]"}]
  * }
  * }
+ * <p>
+ * Comment:
+ * [DINO_NAME] - Dino name
+ * [NAME] - Author Username
+ * [DINO_COLOR_TID] - (integer) TID (98 - Green, 99 - Red, 100 - Purple)
+ * [DINO_ABOUT] - Dino about
+ * [DAY] - ex. 1
+ * [MONTH] - ex. 9
+ * [YEAR] - ex. 2017
+ * [FID] - Image file ID (ref. File Tab)
+ * [NID] - Entity ID
  */
 public class DinoCreate {
 

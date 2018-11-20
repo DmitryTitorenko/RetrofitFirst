@@ -5,6 +5,23 @@ import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by Dmitry Titorenko on 15.11.2018.
+ * <p>
+ * This POJO use for correct send Image dino in JSON to server:
+ * {
+ * "filename": "[NAME]",
+ * "target_uri": "pictures/[ADDR]",
+ * "filemime": "image/[FORMAT]",
+ * "file": "[BASE64]",
+ * "filesize": "[SIZE]"
+ * }
+ * <p>
+ * Comment:
+ * [FID] - File ID
+ * [NAME] - Full file name (dino.jpg)
+ * [ADDR] - File address (dino.jpg)
+ * [FORMAT] - File format (jpeg/png)
+ * [BASE64] - base64 encoded file code
+ * [SIZE] - Size (bites)
  */
 public class ImageSend {
 
@@ -24,40 +41,20 @@ public class ImageSend {
     @Expose
     private String fileSize;
 
-    public String getFileName() {
-        return fileName;
-    }
-
     public void setFileName(String fileName) {
         this.fileName = fileName;
-    }
-
-    public String getTargetUri() {
-        return targetUri;
     }
 
     public void setTargetUri(String targetUri) {
         this.targetUri = targetUri;
     }
 
-    public String getFileMime() {
-        return fileMime;
-    }
-
     public void setFileMime(String fileMime) {
         this.fileMime = fileMime;
     }
 
-    public String getFile() {
-        return file;
-    }
-
     public void setFile(String file) {
         this.file = file;
-    }
-
-    public String getFileSize() {
-        return fileSize;
     }
 
     public void setFileSize(String fileSize) {
