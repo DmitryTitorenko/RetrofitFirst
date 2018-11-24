@@ -2,6 +2,7 @@ package com.example.retrofitfirst;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -37,6 +38,14 @@ public class RegistrationActivity extends AppCompatActivity {
         String password = etPassword.getText().toString();
 
         MainLogic.getInstance().start();
-        MainLogic.getInstance().regUserStart(name, mail, password);
+        MainLogic.getInstance().regUserStart(name, mail, password, this);
+    }
+
+    /*
+    User name, mail and password is correct -> start AuthorizationActivity
+     */
+    public void GoToAuthorization() {
+        Intent intent = new Intent(this, AuthorizationActivity.class);
+        startActivity(intent);
     }
 }

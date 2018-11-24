@@ -35,27 +35,24 @@ public class AuthorizationActivity extends AppCompatActivity {
 
         MainLogic.getInstance().start();
 
-        MainLogic.getInstance().userLogInStart(name, password,  this);
-
-
+        MainLogic.getInstance().userLogInStart(name, password, this);
 
     }
 
+    /*
+    If user is new -> he press registration button
+     */
     public void toRegistrationUser(View view) {
         Intent intent = new Intent(this, RegistrationActivity.class);
         startActivity(intent);
     }
 
-    public void startListDino(){
-        if (UserLogic.isLogIn.equals("Yep")) {
-            Intent intent = new Intent(this, ViewDinosActivity.class);
-            startActivity(intent);
-
-        } else {
-            Context context = getApplicationContext();
-            CharSequence text = "Not correct login or password";
-            Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
-            toast.show();
-        }
+    /*
+    Create  ViewDinosActivity
+    */
+    public void startListDino() {
+        Intent intent = new Intent(this, ViewDinosActivity.class);
+        startActivity(intent);
     }
 }
+
