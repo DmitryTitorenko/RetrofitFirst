@@ -118,7 +118,7 @@ public class CreateDinoActivity extends AppCompatActivity {
 
         fieldDitoImage.setUnd(undImageList);
 
-        MainLogic.getInstance().sendDino(title, status, name, type, fieldDinoColor, fieldDinoAbout, fieldDinoBirthDate, fieldDitoImage);
+        MainLogic.getInstance().sendDino(title, status, name, type, fieldDinoColor, fieldDinoAbout, fieldDinoBirthDate, fieldDitoImage, this);
     }
 
 
@@ -197,6 +197,14 @@ public class CreateDinoActivity extends AppCompatActivity {
         if (cut != -1)
             result = result.substring(cut + 1);
         return result;
+    }
+
+    /*
+     When create dino successful, return to dino list
+     */
+    public void returnToListDino() {
+        Intent intent = new Intent(this, ViewDinosActivity.class);
+        startActivity(intent);
     }
 }
 

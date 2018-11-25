@@ -1,8 +1,10 @@
 package com.example.retrofitfirst.logic;
 
-import android.util.Log;
+import android.widget.Toast;
 
+import com.example.retrofitfirst.CreateDinoActivity;
 import com.example.retrofitfirst.ViewDinoAdapter;
+import com.example.retrofitfirst.ViewDinosActivity;
 import com.example.retrofitfirst.api.DinoAPI;
 import com.example.retrofitfirst.entity.dino.get.DinoWrapper;
 import com.example.retrofitfirst.entity.dino.create.DinoCreate;
@@ -27,8 +29,6 @@ import retrofit2.Response;
  */
 public class DinoLogic {
 
-    private static final String TAG = "MyLog";
-
     /**
      * Send JSON to get dinos and response from server.
      *
@@ -37,7 +37,7 @@ public class DinoLogic {
      * @param rvDinos         use for notifyDataSetChanged() in viewDinoAdapter.
      */
 
-    public static void getDinos(DinoAPI dinoAPI, ViewDinoAdapter viewDinoAdapter, RecyclerView rvDinos) {
+    public static void getDinos(DinoAPI dinoAPI, ViewDinoAdapter viewDinoAdapter, RecyclerView rvDinos, ViewDinosActivity viewDinosActivity) {
 
         Call<DinoWrapper> call = dinoAPI.loadDinos();
 
@@ -53,12 +53,10 @@ public class DinoLogic {
 
                     // notify adapter about it
                     rvDinos.getAdapter().notifyDataSetChanged();
-
-                    Log.i(TAG, "get Dino correct");
-                    Log.i(TAG, response.body().getDinos().get(0).getDino().getDinoTitle());
-
                 } else {
-                    System.out.println(response.errorBody());
+                    Toast toast = Toast.makeText(viewDinosActivity.getApplicationContext(),
+                            response.message(), Toast.LENGTH_LONG);
+                    toast.show();
                 }
             }
 
@@ -92,7 +90,8 @@ public class DinoLogic {
                          FieldDinoColor fieldDinoColor,
                          FieldDinoAbout fieldDinoAbout,
                          FieldDinoBirthDate fieldDinoBirthDate,
-                         FieldDitoImage fieldDitoImage) {
+                         FieldDitoImage fieldDitoImage,
+                         CreateDinoActivity createDinoActivity) {
 
         UserLogInResponse userLogInResponse = MainLogic.getInstance().getUserLogInResponse();
 
@@ -120,9 +119,11 @@ public class DinoLogic {
                     public void onResponse(Call<DinoResponse> call, Response<DinoResponse> response) {
 
                         if (response.isSuccessful()) {
-                            Log.i(TAG, "works create Dino");
-                            Log.i(TAG, response.body().getUri());
-                            Log.i(TAG, response.body().getNid());
+                            createDinoActivity.returnToListDino();
+                        } else {
+                            Toast toast = Toast.makeText(createDinoActivity.getApplicationContext(),
+                                    response.message(), Toast.LENGTH_LONG);
+                            toast.show();
                         }
                     }
 

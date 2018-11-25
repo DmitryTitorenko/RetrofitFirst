@@ -3,8 +3,10 @@ package com.example.retrofitfirst.logic;
 import android.graphics.Bitmap;
 
 import com.example.retrofitfirst.AuthorizationActivity;
+import com.example.retrofitfirst.CreateDinoActivity;
 import com.example.retrofitfirst.RegistrationActivity;
 import com.example.retrofitfirst.ViewDinoAdapter;
+import com.example.retrofitfirst.ViewDinosActivity;
 import com.example.retrofitfirst.api.DinoAPI;
 import com.example.retrofitfirst.api.ImageAPI;
 import com.example.retrofitfirst.api.UserAPI;
@@ -73,9 +75,9 @@ public class MainLogic {
                 .build();
     }
 
-    public void getDinos(ViewDinoAdapter viewDinoAdapter, RecyclerView rvDinos) {
+    public void getDinos(ViewDinoAdapter viewDinoAdapter, RecyclerView rvDinos, ViewDinosActivity viewDinosActivity) {
         dinoAPI = retrofit.create(DinoAPI.class);
-        DinoLogic.getDinos(dinoAPI, viewDinoAdapter, rvDinos);
+        DinoLogic.getDinos(dinoAPI, viewDinoAdapter, rvDinos, viewDinosActivity);
     }
 
 
@@ -93,7 +95,8 @@ public class MainLogic {
                          FieldDinoColor fieldDinoColor,
                          FieldDinoAbout fieldDinoAbout,
                          FieldDinoBirthDate fieldDinoBirthDate,
-                         FieldDitoImage fieldDitoImage) {
+                         FieldDitoImage fieldDitoImage,
+                         CreateDinoActivity createDinoActivity) {
         dinoAPI = retrofit.create(DinoAPI.class);
         DinoLogic dinoLogic = new DinoLogic();
         dinoLogic.sendDino(dinoAPI,
@@ -104,7 +107,8 @@ public class MainLogic {
                 fieldDinoColor,
                 fieldDinoAbout,
                 fieldDinoBirthDate,
-                fieldDitoImage);
+                fieldDitoImage,
+                createDinoActivity);
     }
 
 

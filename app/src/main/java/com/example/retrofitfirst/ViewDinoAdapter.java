@@ -108,4 +108,16 @@ public class ViewDinoAdapter extends RecyclerView.Adapter<ViewDinoAdapter.DinoHo
     ViewDinoAdapter(DinoWrapper dinoWrapper) {
         this.dinoWrapper = dinoWrapper;
     }
+
+
+    public void clear() {
+        final int size = dinoWrapper.getDinos().size();
+        if (size > 0) {
+            for (int i = 0; i < size; i++) {
+                dinoWrapper.getDinos().remove(0);
+            }
+
+            notifyItemRangeRemoved(0, size);
+        }
+    }
 }
