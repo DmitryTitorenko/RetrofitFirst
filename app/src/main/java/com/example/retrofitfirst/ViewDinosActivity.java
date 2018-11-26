@@ -8,6 +8,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.retrofitfirst.entity.dino.get.DinoWrapper;
 import com.example.retrofitfirst.logic.MainLogic;
@@ -26,7 +27,7 @@ public class ViewDinosActivity extends AppCompatActivity implements SwipeRefresh
         setContentView(R.layout.activity_view_dinos);
 
         swipeContainer = findViewById(R.id.swiperefresh);
-
+        swipeContainer.setOnRefreshListener(this);
 
         // Lookup the recyclerview in activity layout
         rvDinos = findViewById(R.id.rvDinos);
@@ -55,15 +56,16 @@ public class ViewDinosActivity extends AppCompatActivity implements SwipeRefresh
         startActivity(intent);
     }
 
-
-    //                    rvDinos.getAdapter().notifyDataSetChanged();
-
-
+    /*
+    Update lis of items when user want to swipe refresh list fo dinos.
+     */
     @Override
     public void onRefresh() {
-        rvDinos.setAdapter(null);
-        //viewDinoAdapter.clear();
-        viewDinoAdapter = new ViewDinoAdapter(new DinoWrapper());
+        Toast toast = Toast.makeText(this,
+                "onRefresh", Toast.LENGTH_LONG);
+        toast.show();
+
+        viewDinoAdapter.clear();
         rvDinos.setAdapter(viewDinoAdapter);
 
         MainLogic.getInstance().getDinos(viewDinoAdapter, rvDinos, this);

@@ -110,13 +110,16 @@ public class ViewDinoAdapter extends RecyclerView.Adapter<ViewDinoAdapter.DinoHo
     }
 
 
+    /*
+    Delete all dinos.
+    Method use in ViewDinosActivity.onRefresh when user want to swipe refresh list fo dinos.
+     */
     public void clear() {
         final int size = dinoWrapper.getDinos().size();
         if (size > 0) {
             for (int i = 0; i < size; i++) {
                 dinoWrapper.getDinos().remove(0);
             }
-
             notifyItemRangeRemoved(0, size);
         }
     }
